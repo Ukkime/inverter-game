@@ -1,19 +1,13 @@
-.cell5 {
-  height: 5em;
-  width: 5em;
+.grow {
+  display: flex;
+
 }
 
-.cell8 {
-  height: 3em;
-  width: 3em;
-}
-
-.cell10 {
-  height: 2.3em;
-  width: 2.3em;
-}
-
-.cell {
+.gcell {
+  position: relative;
+  flex-basis: 20%;
+  border: 1px solid;
+  box-sizing: border-box;
   border-radius: 5px;
   border-color: darkgray;
   margin: 1px;
@@ -21,14 +15,14 @@
     inset 5px 5px 0px 1px rgba(255, 255, 255, 0.5);
   box-shadow: inset 0px 0px 0px 3px #413e3e,
     inset 5px 5px 0px 1px rgba(255, 255, 255, 0.4);
-  padding-left: 3px;
-  padding-top: 5px;
 }
 
-.panel {
-
-
+.gcell::before {
+  content: '';
+  display: block;
+  padding-top: 100%;
 }
+
 
 .game-container {
   padding-right: 15px;

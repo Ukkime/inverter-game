@@ -60,12 +60,10 @@
 
   <br />
   <div class="panel">
-    <div class="trow" *ngFor="let row of grid; let i = index">
+    <div class="grow" *ngFor="let row of grid; let i = index">
       <div
-        class="hand cell"
-        [class.cell5]="size == 5"
-        [class.cell8]="size == 8"
-        [class.cell10]="size == 10"
+        class="hand gcell"
+
         [class.active]="grid[i][j] == '🟢'"
         [class.inactive]="!(grid[i][j] == '🟢')"
         (click)="updateclicked(i, j)"
