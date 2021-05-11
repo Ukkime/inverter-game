@@ -63,14 +63,16 @@
     <div class="grow" *ngFor="let row of grid; let i = index">
       <div
         class="hand gcell"
+        [class.gcell5]="size == 5"
+        [class.gcell8]="size == 8"
+        [class.gcell10]="size == 10"
 
         [class.active]="grid[i][j] == '🟢'"
         [class.inactive]="!(grid[i][j] == '🟢')"
         (click)="updateclicked(i, j)"
         *ngFor="let cell of row; let j = index"
       >
-        &nbsp;
-        <span *ngIf="coordinate">{{ i + " " + j }}</span>
+
       </div>
     </div>
     <br />
