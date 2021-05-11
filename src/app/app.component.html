@@ -31,40 +31,35 @@
     </div>
     &nbsp;
     <button type="submit" class="btn btn-primary" (click)="changesize()">
-      Generate</button
-    >&nbsp;
+      Generate</button>&nbsp;
     <button
       type="submit"
       class="btn"
       [class.btn-primary]="imgmode"
       (click)="imgmode = !imgmode"
     >
-      Picture Mode</button
-    >&nbsp;
+      Picture Mode</button>&nbsp;
     <button
       type="submit"
       class="btn"
       [class.btn-primary]="coordinate"
       (click)="coordinate = !coordinate"
     >
-      Show Coords</button
-    >&nbsp;
+      Show Coords</button>&nbsp;
     <button
       type="submit"
       class="btn"
       [class.btn-primary]="showrawcode"
       (click)="showrawcode = !showrawcode"
     >
-      Show Rawcode</button
-    >&nbsp;
+      Show Rawcode</button>&nbsp;
     <button
       type="submit"
       class="btn"
       [class.btn-primary]="showrawcode"
       (click)="updaterawcode()"
     >
-      Update Rawcode</button
-    >&nbsp;
+      Update Rawcode</button>&nbsp;
   </form>
   <br />
   <form class="form-inline" *ngIf="imgmode">
@@ -147,21 +142,13 @@
   <br />
   <div class="panel">
     <div class="trow" *ngFor="let row of grid; let i = index">
-      <div
-        class="hand"
-        [class.cell5]="size == 5"
-        [class.cell8]="size == 8"
-        [class.cell10]="size == 10"
-        [class.cell50]="size == 50"
-        [class.active]="grid[i][j] == '🟢' && !imgmode"
+      <div class="hand cell" [class.cell5]="size == 5" [class.cell8]="size == 8" [class.cell10]="size == 10"
+        [class.cell50]="size == 50" [class.active]="grid[i][j] == '🟢' && !imgmode"
         [class.inactive]="!(grid[i][j] == '🟢') && !imgmode"
         [style.background-image]="grid[i][j] == '🟢' && imgmode ? 'url(' + photo1 + ')' : !(grid[i][j] == '🟢') && imgmode ? 'url(' + photo2 + ') !important' : 'none'"
-        (click)="updateclicked(i,j)"
-        style="
+        (click)="updateclicked(i,j)" style="
              background-position: {{((100/grid.length) * j )}}% {{((100/grid[0].length) * i )}}%;
-           "
-        *ngFor="let cell of row; let j = index"
-      >
+           " *ngFor="let cell of row; let j = index">
         &nbsp;
         <span *ngIf="coordinate">{{(i) + ' ' + (j)}}</span>
       </div>
@@ -175,23 +162,19 @@
         rows="8"
         *ngIf="showrawcode"
       >
-{{rawcode}}</textarea
-      >
+{{rawcode}}</textarea>
     </div>
     <br />
     <h4>
       <span *ngIf="gameover"
         >You win!
-        <span class="hand" (click)="startNewwGame()">Play again??</span></span
-      >
+        <span class="hand" (click)="startNewwGame()">Play again??</span></span>
       <span *ngIf="!gameover">&nbsp;</span>
     </h4>
     <br />
     <br />
     <h5>
-      <a
-        href="https://colab.research.google.com/drive/1nk7gqDG_ogPcHYxlw-Qq6ZNpbQEEzDfx?usp=sharing"
-      >
+      <a href="https://colab.research.google.com/drive/1nk7gqDG_ogPcHYxlw-Qq6ZNpbQEEzDfx?usp=sharing">
         Game Solver in python
       </a>
     </h5>

@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'my-app',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: "my-app",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"],
 })
 export class AppComponent implements OnInit {
   constructor() {}
@@ -21,8 +21,8 @@ export class AppComponent implements OnInit {
 
   // Images for the imgmode
   photo1: string =
-    'https://i.ibb.co/gty82v4/7e91496f93a217fe7115b903895227d7dad89069v2-hq.jpg';
-  photo2: string = 'https://i.ibb.co/1Tfgbp1/16-168787-kira-god-death-note.jpg';
+    "https://i.ibb.co/gty82v4/7e91496f93a217fe7115b903895227d7dad89069v2-hq.jpg";
+  photo2: string = "https://i.ibb.co/1Tfgbp1/16-168787-kira-god-death-note.jpg";
 
   ngOnInit(): void {
     // Start the game
@@ -40,10 +40,10 @@ export class AppComponent implements OnInit {
     // Init grid
     this.grid = [];
     // choose 🟢(true) or 🔴(false) using math random with 50% of probability
-    let fillvalue: string = Math.random() < 0.5 ? '🟢' : '🔴';
+    let fillvalue: string = Math.random() < 0.5 ? "🟢" : "🔴";
 
     // Save initial grid type in routepath
-    this.route = 'Starts with ' + fillvalue + ' grid\n';
+    this.route = "Starts with " + fillvalue + " grid\n";
 
     // Fills array
     for (let i = 0; i < this.size; i++) {
@@ -62,7 +62,7 @@ export class AppComponent implements OnInit {
       // change cell value
       this.update(f, c);
       // Update route path
-      this.route += '(' + f + ',' + c + ')';
+      this.route += "(" + f + "," + c + ")";
 
       // checkNeighbors and change values
       this.checkNeighbors(f, c);
@@ -74,7 +74,7 @@ export class AppComponent implements OnInit {
 
   update(f, c): void {
     // invert cell value
-    this.grid[f][c] = this.grid[f][c] == '🟢' ? '🔴' : '🟢';
+    this.grid[f][c] = this.grid[f][c] == "🟢" ? "🔴" : "🟢";
   }
 
   checkNeighbors(f, c): void {
@@ -148,7 +148,7 @@ export class AppComponent implements OnInit {
     let win = true;
     for (let f = 0; f < this.grid.length; f++) {
       for (let c = 0; c < this.grid[f].length; c++) {
-        win = this.grid[f][c] == '🟢' && win;
+        win = this.grid[f][c] == "🟢" && win;
       }
     }
     if (win) {
@@ -162,7 +162,7 @@ export class AppComponent implements OnInit {
     let win = true;
     for (let f = 0; f < this.grid.length; f++) {
       for (let c = 0; c < this.grid[f].length; c++) {
-        win = !(this.grid[f][c] == '🟢') && win;
+        win = !(this.grid[f][c] == "🟢") && win;
       }
     }
     if (win) {
@@ -178,35 +178,35 @@ export class AppComponent implements OnInit {
 
   updaterawcode(): void {
     // 🟢 🔴 Array
-    this.rawcode = '[\n';
+    this.rawcode = "[\n";
     for (let f = 0; f < this.grid.length; f++) {
-      this.rawcode += '  [';
+      this.rawcode += "  [";
       for (let c = 0; c < this.grid[f].length; c++) {
-        if (this.grid[f][c] == '🟢') {
+        if (this.grid[f][c] == "🟢") {
           this.rawcode += "'🟢',";
         } else {
           this.rawcode += "'🔴',";
         }
       }
-      this.rawcode += '],\n';
+      this.rawcode += "],\n";
     }
-    this.rawcode += ']\n';
+    this.rawcode += "]\n";
 
     // Binary array
     for (let f = 0; f < this.grid.length; f++) {
-      this.rawcode += '';
+      this.rawcode += "";
       for (let c = 0; c < this.grid[f].length; c++) {
-        if (this.grid[f][c] == '🟢') {
-          this.rawcode += '1 ';
+        if (this.grid[f][c] == "🟢") {
+          this.rawcode += "1 ";
         } else {
-          this.rawcode += '0 ';
+          this.rawcode += "0 ";
         }
       }
-      this.rawcode += '\n';
+      this.rawcode += "\n";
     }
-    this.rawcode += '\n';
+    this.rawcode += "\n";
 
-    this.rawcode += '\n' + this.route;
+    this.rawcode += "\n" + this.route;
   }
 
   // starts new game

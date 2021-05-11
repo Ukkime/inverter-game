@@ -30,6 +30,15 @@
   margin: 0.5px;
 }
 
+.cell {
+  -webkit-box-shadow: inset 0px 0px 0px 3px #413e3e,
+    inset 5px 5px 0px 1px rgba(255, 255, 255, 0.5);
+  box-shadow: inset 0px 0px 0px 3px #413e3e,
+    inset 5px 5px 0px 1px rgba(255, 255, 255, 0.4);
+  padding-left: 3px;
+  padding-top: 5px;
+}
+
 .panel {
 }
 
