@@ -1,0 +1,62 @@
+.cell5 {
+  height: 5.3em;
+  width: 5.3em;
+}
+
+.cell8 {
+  height: 3.25em;
+  width: 3.25em;
+}
+
+.cell10 {
+  height: 2.55em;
+  width: 2.55em;
+}
+
+.cell {
+  border-radius: 5px;
+  border-color: darkgray;
+  margin: 1px;
+  -webkit-box-shadow: inset 0px 0px 0px 3px #413e3e,
+    inset 5px 5px 0px 1px rgba(255, 255, 255, 0.5);
+  box-shadow: inset 0px 0px 0px 3px #413e3e,
+    inset 5px 5px 0px 1px rgba(255, 255, 255, 0.4);
+  padding-left: 3px;
+  padding-top: 5px;
+}
+
+.panel {
+
+
+}
+
+.game-container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+
+}
+
+.trow {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+
+.active {
+  background-color: cadetblue;
+}
+
+.inactive {
+  background-color: rgb(108, 114, 114);
+}
+
+.hand:hover {
+  cursor: pointer;
+}
+
+.rawcode {
+  width: 400px;
+}
+

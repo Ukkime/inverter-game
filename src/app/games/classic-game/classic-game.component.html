@@ -1,0 +1,99 @@
+<div class="game-container">
+  <br />
+  <form class="form-inline">
+    <div class="form-group">
+      <select
+        class="form-control"
+        (change)="startNewwGame()"
+        [(ngModel)]="size"
+        [ngModelOptions]="{ standalone: true }"
+      >
+        <option value="5" selected>Size 5</option>
+        <option value="8">Size 8</option>
+        <option value="10">Size 10</option>
+        <option value="50">Size 50</option>
+      </select>
+    </div>
+    &nbsp;
+    <div class="form-group">
+      <select
+        class="form-control"
+        [(ngModel)]="shuffleLimit"
+        [ngModelOptions]="{ standalone: true }"
+      >
+        <option value="3">Really easy</option>
+        <option value="5" selected>Easy</option>
+        <option value="10">Normal</option>
+        <option value="20">Hard</option>
+        <option value="50">Very Hard</option>
+        <option value="500">Insane</option>
+      </select>
+    </div>
+    &nbsp;
+    <button type="submit" class="btn btn-primary" (click)="changesize()">
+      Generate</button
+    >&nbsp;
+    <button
+      type="submit"
+      class="btn"
+      [class.btn-primary]="coordinate"
+      (click)="coordinate = !coordinate"
+    >
+      Show Coords</button
+    >&nbsp;
+    <button
+      type="submit"
+      class="btn"
+      [class.btn-primary]="showrawcode"
+      (click)="showrawcode = !showrawcode"
+    >
+      Show Rawcode</button
+    >&nbsp;
+    <button
+      type="submit"
+      class="btn"
+      [class.btn-primary]="showrawcode"
+      (click)="updaterawcode()"
+    >
+      Update Rawcode</button
+    >&nbsp;
+  </form>
+
+  <br />
+  <div class="panel">
+    <div class="trow" *ngFor="let row of grid; let i = index">
+      <div
+        class="hand cell"
+        [class.cell5]="size == 5"
+        [class.cell8]="size == 8"
+        [class.cell10]="size == 10"
+        [class.active]="grid[i][j] == '🟢'"
+        [class.inactive]="!(grid[i][j] == '🟢')"
+        (click)="updateclicked(i, j)"
+        *ngFor="let cell of row; let j = index"
+      >
+        &nbsp;
+        <span *ngIf="coordinate">{{ i + " " + j }}</span>
+      </div>
+    </div>
+    <br />
+
+    <div class="rawcode">
+      <textarea
+        class="form-control"
+        [attr.disabled]="true"
+        rows="8"
+        *ngIf="showrawcode"
+        >{{ rawcode }}</textarea
+      >
+    </div>
+    <br />
+    <h4>
+      <span *ngIf="gameover"
+        >You win!
+        <span class="hand" (click)="startNewwGame()">Play again??</span></span
+      >
+      <span *ngIf="!gameover">&nbsp;</span>
+    </h4>
+  </div>
+</div>
