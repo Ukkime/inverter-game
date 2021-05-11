@@ -7,6 +7,10 @@ const routes: Routes = [
     loadChildren: () =>
       import('../app/games/games.module').then((m) => m.GamesModule),
   },
+  {
+    path: '**',
+    redirectTo: 'games/classic',
+  },
 ];
 
 @NgModule({
