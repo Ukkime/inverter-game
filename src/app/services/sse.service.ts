@@ -1,5 +1,5 @@
-import { Injectable, NgZone } from "@angular/core";
-import { Observable } from "rxjs";
+import { Injectable, NgZone } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +9,7 @@ export class SseService {
   private _eventSource: EventSource;
 
   constructor(private _zone: NgZone) {
-    this.endpoint = 'https://inverter-api.azurewebsites.net/';
+    this.endpoint = 'https://invertergameapi.azurewebsites.net';
   }
 
   getServerSentEvent(gameid: string, playerid: string): Observable<any> {
