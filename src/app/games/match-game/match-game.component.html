@@ -11,20 +11,20 @@
         Create Game
       </button> -->
       &nbsp;
-      <button type="submit" class="btn btn-primary" (click)="searchGame()" *ngIf="!waiting && !playing">
-        Search Game
-      </button>
+      <div class="button" (click)="searchGame()" *ngIf="!waiting && !playing">
+        <div class="title text-center">Search Game</div>
+      </div>
       <div *ngIf="(this.game.active && (this.game.getOpponentName() == '')) || (this.game.getOpponentName() == '' || waiting)" class="alert text-center">
         Searching game with nickname:<br/>
         <b>{{this.game.getPlayerName()}}</b>
         <br/><br/>
-        <button type="submit" class="btn btn-danger" (click)="stopGame()">
-          Stop Game
-        </button>
+        <div class="button button-cancel" (click)="stopGame()">
+          <div class="title text-center">Stop Game</div>
+        </div>
       </div>
-      <button type="submit" class="btn btn-danger" (click)="stopGame()" *ngIf="playing && !(this.game.getOpponentName() == '')">
-        Stop Game
-      </button>
+      <div class="button button-cancel" (click)="stopGame()" *ngIf="playing && !(this.game.getOpponentName() == '')">
+        <div class="title text-center">Stop Game</div>
+      </div>
     </div>
 
   &nbsp;
