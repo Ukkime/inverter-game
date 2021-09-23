@@ -8,7 +8,7 @@
         [(ngModel)]="size"
         [ngModelOptions]="{ standalone: true }"
       >
-        <option value="5" selected>Size 5</option>
+        <option value="6" selected>Size 6</option>
         <option value="8">Size 8</option>
         <option value="10">Size 10</option>
       </select>
@@ -63,7 +63,7 @@
     <div class="grow" *ngFor="let row of grid; let i = index">
       <div
         class="hand gcell"
-        [class.gcell5]="size == 5"
+        [class.gcell6]="size == 6"
         [class.gcell8]="size == 8"
         [class.gcell10]="size == 10"
 

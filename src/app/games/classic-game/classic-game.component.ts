@@ -15,7 +15,7 @@ export class ClassicGameComponent implements OnInit {
   // Some config variables
   grid: string[][]; // Our game grid
   gameover: boolean = false; // Control when the game ends
-  size: number = 5; // Cols an rows number (grid's size)
+  size: number = 6; // Cols an rows number (grid's size)
   shuffleLimit: number = 20; // Number of clicks to emulate when grid is generated
   coordinate: boolean = false; // Show coordinates (i massive recommend to desactivate in large grids)
   showrawcode: boolean = false; // Shows arrays and generating path for debug purposes

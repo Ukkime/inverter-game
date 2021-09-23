@@ -1,0 +1,90 @@
+<div class="game-container screen">
+  <br />
+
+    <div class="form-group">
+      <input class="form-control" type="text" placeholder="Enter NickName" [attr.disabled]="waiting ? true : null" name="username" [(ngModel)]="username" (keyup)="checkusername()" (change)="checkusername()">
+    </div>
+
+    <div class="form-group text-right">
+      <!--
+      <button type="submit" class="btn btn-primary" (click)="createGame()" *ngIf="!waiting && !playing">
+        Create Game
+      </button> -->
+      &nbsp;
+      <button type="submit" class="btn btn-primary" (click)="searchGame()" *ngIf="!waiting && !playing">
+        Search Game
+      </button>
+      <div *ngIf="(this.game.active && (this.game.getOpponentName() == '')) || (this.game.getOpponentName() == '' || waiting)" class="alert text-center">
+        Searching game with nickname:<br/>
+        <b>{{this.game.getPlayerName()}}</b>
+        <br/><br/>
+        <button type="submit" class="btn btn-danger" (click)="stopGame()">
+          Stop Game
+        </button>
+      </div>
+      <button type="submit" class="btn btn-danger" (click)="stopGame()" *ngIf="playing && !(this.game.getOpponentName() == '')">
+        Stop Game
+      </button>
+    </div>
+
+  &nbsp;
+
+
+  <div class="alert alert-info" *ngIf="gamenotfound">
+    There is no active game, please create new game!
+  </div>
+  <div class="alert alert-success" *ngIf="validusername && !waiting && !playing">
+    Ready to find opponent
+  </div>
+  <div class="alert alert-warning" *ngIf="!validusername&& !waiting">
+    Enter valid nickname <br/>
+    (without space and between 3 and 15 characters)
+  </div>
+  <div class="alert alert-info" *ngIf="this.game.getOpponentName() == '' || waiting">
+    Waiting for your opponent ...
+  </div>
+  <div class="timer text-center" *ngIf="playing">
+    <h1 class="hh1" *ngIf="winner=='' && this.game.getOpponentName() != ''">{{calculateSeconds()}}</h1>
+    <h2 class="hh2" *ngIf="winner!=''">WINNER: {{winner}}</h2>
+  </div>
+  <div class="timer text-center" *ngIf="playing && this.game.getOpponentName() != ''">
+    <div class="scorerow text-center">
+      <div class="scorecolumn">
+        <span class="score">Your score</span><br/>
+        <span class="scorevalue">{{this.game.getPlayerScore()}}%</span>
+      </div>
+      <div class="scorecolumn">
+         <span class="score">{{this.game.getOpponentName()}}</span><br/>
+        <span class="scorevalue">{{this.game.getOpponentScore()}}%</span>
+      </div>
+    </div>
+  </div>
+
+  <br />
+  <div class="panel" *ngIf="this.game._player_board!=null">
+    <div class="grow" *ngFor="let row of this.game._player_board; let i = index">
+      <div
+        class="hand gcell"
+        [class.gcell6]="true"
+
+        [class.active]="this.game._player_board[i][j] == true"
+        [class.inactive]="!(this.game._player_board[i][j] == true)"
+        (click)="updateclicked(i, j)"
+        *ngFor="let cell of row; let j = index"
+      >
+
+      </div>
+    </div>
+    <br />
+
+
+    <h3>
+      Game rules:
+    </h3>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Paint all grid with the same color</li>
+        <li class="list-group-item">Each cell you click  and his neightbors will invert they color</li>
+        <li class="list-group-item">Be fun!</li>
+      </ul>
+  </div>
+</div>

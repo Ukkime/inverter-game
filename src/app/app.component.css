@@ -1,0 +1,12 @@
+
+@media screen and (max-width: 600px) {
+  .screen {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .screen {
+    width: 30%;
+  }
+}

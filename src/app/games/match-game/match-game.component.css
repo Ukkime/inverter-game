@@ -1,3 +1,24 @@
+.scorerow {
+  display: flex;
+}
+
+.scoremargincolumn {
+  flex: 10%;
+}
+
+.scorecolumn {
+  flex: 40%;
+}
+
+.score {
+  padding-bottom: 0px;
+}
+
+.scorevalue {
+  padding-top: 0px;
+  font-size: 3em;
+}
+
 .grow {
   display: flex;
   flex-wrap: wrap;
@@ -43,6 +64,23 @@
 
 }
 
+
+@media screen and (max-width: 600px) {
+  .screen {
+
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .screen {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  }
+}
+
+
 .trow {
   display: flex;
   flex-wrap: wrap;
@@ -61,7 +99,19 @@
   cursor: pointer;
 }
 
-.rawcode {
-  width: 400px;
+.timer {
+    padding: 0px;
+    margin-bottom: 0px;
 }
 
+.hh1 {
+    margin-top: 0px;
+    margin-bottom: 10px;
+    font-size: 5em;
+}
+
+.hh2 {
+    margin-top: 0px;
+    margin-bottom: 10px;
+    font-size: 3em;
+}
