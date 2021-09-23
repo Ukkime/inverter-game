@@ -71,6 +71,8 @@
   border-radius: 5px;
   border-color: darkgray;
   margin: 50px;
+  margin-bottom: 0px;
+  margin-top: 0px;
   -webkit-box-shadow: inset 0px 0px 0px 3px #413e3e,
     inset 5px 5px 0px 1px rgba(255, 255, 255, 0.5);
   box-shadow: inset 0px 0px 0px 3px #413e3e,
@@ -86,6 +88,9 @@
   text-shadow: 2px 2px 2px rgb(131, 130, 130);
   color: rgb(223, 223, 223);
   font-weight: 800;
+}
+.button-home {
+  background-color: rgb(76, 98, 146);
 }
 
 .title:hover,
