@@ -9,7 +9,7 @@ export class SseService {
   private _eventSource: EventSource;
 
   constructor(private _zone: NgZone) {
-    this.endpoint = 'http://164.90.209.5/';
+    this.endpoint = 'https://inverter-api.azurewebsites.net/';
   }
 
   getServerSentEvent(gameid: string, playerid: string): Observable<any> {
