@@ -6,9 +6,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GamesModule } from './games/games.module';
 import { StartMenuComponent } from './start-menu/start-menu.component';
+import { TutorialComponent } from './tutorial/tutorial.component'
 
 @NgModule({
-  declarations: [AppComponent, StartMenuComponent],
+  declarations: [AppComponent, StartMenuComponent, TutorialComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule, GamesModule],
   providers: [],
   bootstrap: [AppComponent],

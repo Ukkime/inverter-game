@@ -26,7 +26,8 @@
     <div
       *ngIf="
         (this.game.active && this.game.getOpponentName() == '') ||
-        this.game.getOpponentName() == '' || waiting
+        this.game.getOpponentName() == '' ||
+        waiting
       "
       class="alert text-center"
     >
@@ -59,7 +60,7 @@
   </div>
   <div class="alert alert-warning" *ngIf="!validusername && !waiting">
     Enter valid nickname <br />
-    (without space and between 3 and 15 characters)
+    (without spaces and between 3 and 15 characters)
   </div>
   <div
     class="alert alert-info"
@@ -106,15 +107,6 @@
       ></div>
     </div>
     <br />
-
-    <h3>Game rules:</h3>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">Paint all grid with the same color</li>
-      <li class="list-group-item">
-        Each cell you click and his neightbors will invert they color
-      </li>
-      <li class="list-group-item">Be fun!</li>
-    </ul>
   </div>
 </div>
 
