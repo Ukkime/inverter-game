@@ -72,7 +72,10 @@
     <h1 class="hh1" *ngIf="winner == '' && this.game.getOpponentName() != ''">
       {{ calculateSeconds() }}
     </h1>
-    <h2 class="hh2" *ngIf="winner != ''">WINNER: {{ winner }}</h2>
+    <h2 class="hh2" *ngIf="winner != ''">
+      WINNER: <br />
+      {{ winner }}
+    </h2>
   </div>
   <div
     class="timer text-center"
