@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class ApiService {
-  endpoint = 'https://invertergameapi.azurewebsites.net';
+  endpoint = 'https://invertergameapi.azurewebsites.net/';
 
   constructor(private http: HttpClient) {}
 
