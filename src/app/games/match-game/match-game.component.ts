@@ -49,52 +49,47 @@ export class MatchGameComponent implements OnInit {
   }
 
   createGame() {
-    if (!this.waiting_for_response) {
-      this.waiting_for_response = true;
-      this.gamenotfound = false;
-      this.winner = '';
-      this.waiting = true;
-      this._apiService.createGame(this.username).subscribe(
-        (response) => {
-          this.countEventsSubscription$ = this.sseService
-            .getServerSentEvent(response.game_id, response.player_id)
-            .subscribe((event) => {
-              this.waiting_for_response = false;
-              try {
-                let data = JSON.parse(event.data);
+    this.waiting_for_response = true;
+    this.gamenotfound = false;
+    this.winner = '';
+    this.waiting = true;
+    this._apiService.createGame(this.username).subscribe(
+      (response) => {
+        this.countEventsSubscription$ = this.sseService
+          .getServerSentEvent(response.game_id, response.player_id)
+          .subscribe((event) => {
+            this.waiting_for_response = false;
+            try {
+              let data = JSON.parse(event.data);
 
-                if (!this.game.active) {
-                  this.game.start(
-                    response.game_id,
-                    response.player_id,
-                    response.player_name
-                  );
-                } else {
-                  if (data.player1_board != null) {
-                    this.game.setOpponent(data.player2_name);
-                    this.game.updateGame(
-                      data.player1_board,
-                      data.player2_board
-                    );
-                  }
-                  this.game.startTime = data.start_time;
-                  this.game.endTime = data.end_time;
-                  this.playing = true;
-                  this.waiting = false;
-                  if (data.winner != null) {
-                    this.winner = data.winner;
-                  }
+              if (!this.game.active) {
+                this.game.start(
+                  response.game_id,
+                  response.player_id,
+                  response.player_name
+                );
+              } else {
+                if (data.player1_board != null) {
+                  this.game.setOpponent(data.player2_name);
+                  this.game.updateGame(data.player1_board, data.player2_board);
                 }
-              } catch (exception) {
-                console.log(exception);
+                this.game.startTime = data.start_time;
+                this.game.endTime = data.end_time;
+                this.playing = true;
+                this.waiting = false;
+                if (data.winner != null) {
+                  this.winner = data.winner;
+                }
               }
-            });
-        },
-        (error) => {
-          console.log('Error en la petición:' + error);
-        }
-      );
-    }
+            } catch (exception) {
+              console.log(exception);
+            }
+          });
+      },
+      (error) => {
+        console.log('Error en la petición:' + error);
+      }
+    );
   }
 
   searchGame() {
