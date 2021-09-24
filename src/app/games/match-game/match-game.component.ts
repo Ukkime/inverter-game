@@ -3,7 +3,8 @@ import { Subscription } from 'rxjs';
 import { SseService } from '../../services/sse.service';
 import { ApiService } from '../../services/api.service';
 import { Game } from '../../models/game.model';
-import Moment from 'moment';
+//import Moment from 'moment';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-match-game',
@@ -21,9 +22,9 @@ export class MatchGameComponent implements OnInit {
   public winner: string;
   public searching: boolean;
   public gamenotfound: boolean;
-  public waiting_for_response;
+  public waiting_for_response: boolean;
 
-  public p_dissplay_board;
+  public p_dissplay_board: any;
 
   constructor(private _apiService: ApiService, private sseService: SseService) {
     this.username = '';
@@ -157,12 +158,17 @@ export class MatchGameComponent implements OnInit {
   stopGame() {
     this.sseService.stopEventSource();
     this.game = new Game();
+    this.p_dissplay_board = this.game._player_board;
     this.waiting = false;
     this.playing = false;
   }
 
   updateclicked(f: number, c: number): void {
-    console.log(f + ' ' + c);
+    if(this.winner != '' && Math.round((moment().diff(this.game.endTime) / 1000) * -1) > 0) {
+      this.update(f, c);
+      this.checkNeighbors(f, c);
+    }
+
     this._apiService
       .sendClick(this.game.gameid(), this.game.getPlayerid(), f, c)
       .subscribe(
@@ -176,7 +182,83 @@ export class MatchGameComponent implements OnInit {
   }
 
   calculateSeconds() {
-    let seconds = Math.round((Moment().diff(this.game.endTime) / 1000) * -1);
+    let seconds = Math.round((moment().diff(this.game.endTime) / 1000) * -1);
     return seconds >= 0 ? seconds : 0;
+  }
+
+  // live updating borad before check with api
+  update(f: number, c: number): void {
+    // invert cell value
+    this.p_dissplay_board[f][c] =
+      this.p_dissplay_board[f][c] == true ? false : true;
+  }
+
+  checkNeighbors(f: number, c: number): void {
+    // check neighbors positions and update
+    if (
+      f > 0 &&
+      f < this.p_dissplay_board.length - 1 &&
+      c > 0 &&
+      c < this.p_dissplay_board[0].length - 1
+    ) {
+      this.update(f - 1, c);
+      this.update(f - 1, c - 1);
+      this.update(f + 1, c);
+      this.update(f + 1, c + 1);
+      this.update(f + 1, c - 1);
+      this.update(f - 1, c + 1);
+      this.update(f, c - 1);
+      this.update(f, c + 1);
+    } else if (f == 0 && c == 0) {
+      this.update(f + 1, c);
+      this.update(f + 1, c + 1);
+      this.update(f, c + 1);
+    } else if (f == 0 && c > 0 && c < this.p_dissplay_board[0].length - 1) {
+      this.update(f + 1, c);
+      this.update(f + 1, c + 1);
+      this.update(f + 1, c - 1);
+      this.update(f, c - 1);
+      this.update(f, c + 1);
+    } else if (
+      f > 0 &&
+      f < this.p_dissplay_board.length - 1 &&
+      c == this.p_dissplay_board[0].length - 1
+    ) {
+      this.update(f + 1, c);
+      this.update(f + 1, c - 1);
+      this.update(f, c - 1);
+      this.update(f - 1, c);
+      this.update(f - 1, c - 1);
+    } else if (f > 0 && c == 0 && f < this.p_dissplay_board.length - 1) {
+      this.update(f + 1, c);
+      this.update(f + 1, c + 1);
+      this.update(f - 1, c + 1);
+      this.update(f - 1, c);
+      this.update(f, c + 1);
+    } else if (f == 0 && c == this.p_dissplay_board[0].length - 1) {
+      this.update(f, c - 1);
+      this.update(f + 1, c - 1);
+      this.update(f + 1, c);
+    } else if (
+      f == this.p_dissplay_board.length - 1 &&
+      c == this.p_dissplay_board[0].length - 1
+    ) {
+      this.update(f - 1, c - 1);
+      this.update(f - 1, c);
+      this.update(f, c - 1);
+    } else if ( f == this.p_dissplay_board.length - 1 && c == 0) {
+      this.update(f - 1, c);
+      this.update(f - 1, c + 1);
+      this.update(f, c + 1);
+    } else if (
+      f == this.p_dissplay_board.length - 1 &&
+      c < this.p_dissplay_board[0].length - 1
+    ) {
+      this.update(f - 1, c - 1);
+      this.update(f - 1, c + 1);
+      this.update(f - 1, c);
+      this.update(f, c - 1);
+      this.update(f, c + 1);
+    }
   }
 }
