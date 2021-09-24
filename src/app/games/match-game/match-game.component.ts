@@ -49,9 +49,9 @@ export class MatchGameComponent implements OnInit {
   createGame() {
     this.gamenotfound = false;
     this.winner = '';
+    this.waiting = true;
     this._apiService.createGame(this.username).subscribe(
       (response) => {
-        this.waiting = true;
         this.countEventsSubscription$ = this.sseService
           .getServerSentEvent(response.game_id, response.player_id)
           .subscribe((event) => {

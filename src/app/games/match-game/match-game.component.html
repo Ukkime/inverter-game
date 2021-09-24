@@ -20,7 +20,12 @@
         Create Game
       </button> -->
     &nbsp;
-    <div class="button" (click)="searchGame()" *ngIf="!waiting && !playing">
+    <div
+      class="button"
+      (click)="searchGame()"
+      *ngIf="!waiting && !playing"
+      [attr.disabled]="waiting || searching"
+    >
       <div class="title text-center">Search Game</div>
     </div>
     <div
