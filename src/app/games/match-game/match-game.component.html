@@ -20,11 +20,7 @@
         Create Game
       </button> -->
     &nbsp;
-    <div
-      class="button"
-      (click)="searchGame()"
-      *ngIf="!waiting && !playing"
-    >
+    <div class="button" (click)="searchGame()" *ngIf="!waiting && !playing">
       <div class="title text-center">Search Game</div>
     </div>
     <div
@@ -99,16 +95,13 @@
   </div>
 
   <br />
-  <div class="panel" *ngIf="this.game._player_board != null">
-    <div
-      class="grow"
-      *ngFor="let row of this.game._player_board; let i = index"
-    >
+  <div class="panel" *ngIf="p_dissplay_board != null">
+    <div class="grow" *ngFor="let row of p_dissplay_board; let i = index">
       <div
         class="hand gcell"
         [class.gcell6]="true"
-        [class.active]="this.game._player_board[i][j] == true"
-        [class.inactive]="!(this.game._player_board[i][j] == true)"
+        [class.active]="p_dissplay_board[i][j] == true"
+        [class.inactive]="!(p_dissplay_board[i][j] == true)"
         (click)="updateclicked(i, j)"
         *ngFor="let cell of row; let j = index"
       ></div>

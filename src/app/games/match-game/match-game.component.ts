@@ -23,6 +23,8 @@ export class MatchGameComponent implements OnInit {
   public gamenotfound: boolean;
   public waiting_for_response;
 
+  public p_dissplay_board;
+
   constructor(private _apiService: ApiService, private sseService: SseService) {
     this.username = '';
     this.validusername = false;
@@ -72,6 +74,7 @@ export class MatchGameComponent implements OnInit {
                 if (data.player1_board != null) {
                   this.game.setOpponent(data.player2_name);
                   this.game.updateGame(data.player1_board, data.player2_board);
+                  this.p_dissplay_board = this.game._player_board;
                 }
                 this.game.startTime = data.start_time;
                 this.game.endTime = data.end_time;
@@ -123,6 +126,7 @@ export class MatchGameComponent implements OnInit {
                         data.player2_board,
                         data.player1_board
                       );
+                      this.p_dissplay_board = this.game._player_board;
                     }
                     this.game.startTime = data.start_time;
                     this.game.endTime = data.end_time;
