@@ -1,4 +1,5 @@
 .button {
+  user-select: none;
   background-color: cadetblue;
   position: relative;
   border: 1px solid;
