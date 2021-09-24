@@ -3,6 +3,10 @@
   flex-wrap: wrap;
 }
 
+.gcell5 {
+  flex-basis: calc(20% - 2px);
+}
+
 .gcell6 {
   flex-basis: calc(16.66% - 2px);
 }

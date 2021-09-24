@@ -8,7 +8,8 @@
         [(ngModel)]="size"
         [ngModelOptions]="{ standalone: true }"
       >
-        <option value="6" selected>Size 6</option>
+        <option value="5" selected>Size 5</option>
+        <option value="6">Size 6</option>
         <option value="8">Size 8</option>
         <option value="10">Size 10</option>
       </select>
@@ -31,7 +32,7 @@
         <div class="title text-center">Generate</div>
       </div>
     </div>
-    <div class="button button-home"  [routerLink]="['/']">
+    <div class="button button-home" [routerLink]="['/']">
       <div class="title text-center">Back to home</div>
     </div>
     <!--
@@ -66,17 +67,15 @@
     <div class="grow" *ngFor="let row of grid; let i = index">
       <div
         class="hand gcell"
+        [class.gcell5]="size == 5"
         [class.gcell6]="size == 6"
         [class.gcell8]="size == 8"
         [class.gcell10]="size == 10"
-
         [class.active]="grid[i][j] == '🟢'"
         [class.inactive]="!(grid[i][j] == '🟢')"
         (click)="updateclicked(i, j)"
         *ngFor="let cell of row; let j = index"
-      >
-
-      </div>
+      ></div>
     </div>
     <br />
 
@@ -97,13 +96,13 @@
       >
       <span *ngIf="!gameover">&nbsp;</span>
     </h4>
-    <h3>
-      Game rules:
-    </h3>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">Paint all grid with the same color</li>
-        <li class="list-group-item">Each cell you click  and his neightbors will invert they color</li>
-        <li class="list-group-item">Be fun!</li>
-      </ul>
+    <h3>Game rules:</h3>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Paint all grid with the same color</li>
+      <li class="list-group-item">
+        Each cell you click and his neightbors will invert they color
+      </li>
+      <li class="list-group-item">Be fun!</li>
+    </ul>
   </div>
 </div>
