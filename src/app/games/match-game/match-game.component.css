@@ -14,9 +14,28 @@
   padding-bottom: 0px;
 }
 
-.scorevalue {
+.your-scorevalue {
   padding-top: 0px;
   font-size: 3em;
+  color: #F39C12 !important;
+  text-shadow: 3px 3px 0 #ebedef, 4px 4px 0 #f2d7d5;
+  font-weight: 600;
+}
+
+.opponent-scorevalue {
+  padding-top: 0px;
+  font-size: 3em;
+  color: #2C3E50 !important;
+  text-shadow: 3px 3px 0 #ebedef, 4px 4px 0 #f2d7d5;
+  font-weight: 600;
+}
+
+.score {
+  padding-top: 0px;
+  font-size: 1.5em;
+  color: #2C3E50 !important;
+  text-shadow: 3px 3px 0 #ebedef, 4px 4px 0 #f2d7d5;
+  font-weight: 550;
 }
 
 .grow {
@@ -159,4 +178,32 @@
   border-color: darkgray !important;
   font-weight: 800;
   border: 2px solid;
+}
+
+.normaltime {
+  color: #5499C7 !important;
+  text-shadow: 3px 3px 0 #ebedef, 4px 4px 0 #f2d7d5;
+  font-weight: 600;
+  font-size: 5em !important;
+}
+
+.endingtime {
+  color: #CD6155 !important;
+  text-shadow: 3px 3px 0 #ebedef, 4px 4px 0 #f2d7d5;
+  font-weight: 600;
+  font-size: 5em !important;
+}
+
+.winner {
+  color: #F1C40F;
+  text-shadow: 3px 3px 0 #ebedef, 4px 4px 0 #f2d7d5;
+  font-weight: 600;
+  font-size: 5em;
+}
+
+.loser {
+  color: #5D6D7E;
+  text-shadow: 3px 3px 0 #ebedef, 4px 4px 0 #f2d7d5;
+  font-weight: 600;
+  font-size: 5em;
 }

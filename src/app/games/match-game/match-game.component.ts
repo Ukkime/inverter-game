@@ -23,6 +23,7 @@ export class MatchGameComponent implements OnInit {
   public searching: boolean;
   public gamenotfound: boolean;
   public waiting_for_response: boolean;
+  public timer_is_on: boolean;
 
   public p_dissplay_board: any;
 
@@ -85,6 +86,7 @@ export class MatchGameComponent implements OnInit {
                 this.waiting = false;
                 if (data.winner != null) {
                   this.winner = data.winner;
+                  this.game.stop();
                 }
               }
             } catch (exception) {
@@ -139,6 +141,7 @@ export class MatchGameComponent implements OnInit {
                     this.playing = true;
                     if (data.winner != null) {
                       this.winner = data.winner;
+                      this.game.stop();
                     }
                   }
                 } catch (exception) {
@@ -160,7 +163,14 @@ export class MatchGameComponent implements OnInit {
   }
 
   stopGame() {
+
     this.sseService.stopEventSource();
+    try {
+      this.game.stop();
+    } catch(e) {
+      // nothing to do
+    }
+
     this.game = new Game();
     this.p_dissplay_board = this.game._player_board;
     this.waiting = false;
@@ -168,7 +178,7 @@ export class MatchGameComponent implements OnInit {
   }
 
   updateclicked(f: number, c: number): void {
-    if (Math.round((Moment().diff(this.game.endTime) / 1000) * -1) > 0) {
+    if(Math.round((Moment().diff(this.game.endTime) / 1000) * -1) > 0) {
       this.update(f, c);
       this.checkNeighbors(f, c);
     }
@@ -187,7 +197,9 @@ export class MatchGameComponent implements OnInit {
 
   calculateSeconds() {
     let seconds = Math.round((Moment().diff(this.game.endTime) / 1000) * -1);
-    return seconds >= 0 ? seconds : 0;
+    let time = seconds >= 0 ? seconds : 0;
+    this.timer_is_on = time >= 0;
+    return time;
   }
 
   // live updating borad before check with api

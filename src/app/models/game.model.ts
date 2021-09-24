@@ -17,10 +17,13 @@ export class Game {
   public last_player_board: string;
   public last_opponent_board: string;
 
+  private _audio;
+
   public active;
 
   constructor() {
     this.active = false;
+    this._audio = new Audio();
   }
 
   start(gid: string, pid: string, pname: string) {
@@ -33,6 +36,13 @@ export class Game {
     this._opponent_board;
     this.active = true;
 
+    this._audio = new Audio('assets/Solve The Puzzle.ogg');
+    this._audio.play();
+
+  }
+
+  stop() {
+     this._audio.pause();
   }
 
   updateGame(player_board: string, opponent_board: string) {

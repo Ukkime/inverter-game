@@ -60,7 +60,7 @@
   </div>
   <div class="alert alert-warning" *ngIf="!validusername && !waiting">
     Enter valid nickname <br />
-    (without spaces and between 3 and 15 characters)
+    (without spaces and between 4 and 15 characters)
   </div>
   <div
     class="alert alert-info"
@@ -69,12 +69,16 @@
     Waiting for your opponent ...
   </div>
   <div class="timer text-center" *ngIf="playing">
-    <h1 class="hh1" *ngIf="winner == '' && this.game.getOpponentName() != ''">
+    <h1 class="hh1" *ngIf="winner == '' && this.game.getOpponentName() != ''"
+      [class.normaltime]="calculateSeconds() >= 0 && timer_is_on"
+      [class.endingtime]="calculateSeconds() <= 5 && timer_is_on">
       {{ calculateSeconds() }}
     </h1>
-    <h2 class="hh2" *ngIf="winner != ''">
-      WINNER: <br />
-      {{ winner }}
+    <h2 class="hh2" *ngIf="winner != ''"
+                    [class.winner]="winner == username"
+                    [class.loser]="winner != username"
+                    >
+      {{ winner == username ? 'Winner!' :  winner == 'Tie' ? 'Tie!' :'Loser :('}}
     </h2>
   </div>
   <div
@@ -84,12 +88,12 @@
     <div class="scorerow text-center">
       <div class="scorecolumn">
         <span class="score">Your score</span><br />
-        <span class="scorevalue">{{ this.game.getPlayerScore() }}%</span>
+        <span class="your-scorevalue">{{ this.game.getPlayerScore() }}%</span>
       </div>
       <div class="scorecolumn">
         <span class="score">{{ this.game.getOpponentName() }}</span
         ><br />
-        <span class="scorevalue">{{ this.game.getOpponentScore() }}%</span>
+        <span class="opponent-scorevalue ">{{ this.game.getOpponentScore() }}%</span>
       </div>
     </div>
   </div>
@@ -110,6 +114,6 @@
   </div>
 </div>
 
-<div class="button button-home" [routerLink]="['/']">
+<div class="button button-home" [routerLink]="['/']" (click)="stopGame()">
   <div class="title text-center">Back to home</div>
 </div>
