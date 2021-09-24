@@ -21,6 +21,7 @@ export class MatchGameComponent implements OnInit {
   public winner: string;
   public searching: boolean;
   public gamenotfound: boolean;
+  public waiting_for_response;
 
   constructor(private _apiService: ApiService, private sseService: SseService) {
     this.username = '';
@@ -31,6 +32,7 @@ export class MatchGameComponent implements OnInit {
     this.winner = '';
     this.searching = false;
     this.gamenotfound = false;
+    this.waiting_for_response = false;
   }
 
   ngOnInit(): void {}
@@ -47,80 +49,38 @@ export class MatchGameComponent implements OnInit {
   }
 
   createGame() {
-    this.gamenotfound = false;
-    this.winner = '';
-    this.waiting = true;
-    this._apiService.createGame(this.username).subscribe(
-      (response) => {
-        this.countEventsSubscription$ = this.sseService
-          .getServerSentEvent(response.game_id, response.player_id)
-          .subscribe((event) => {
-            try {
-              let data = JSON.parse(event.data);
-
-              if (!this.game.active) {
-                this.game.start(
-                  response.game_id,
-                  response.player_id,
-                  response.player_name
-                );
-              } else {
-                if (data.player1_board != null) {
-                  this.game.setOpponent(data.player2_name);
-                  this.game.updateGame(data.player1_board, data.player2_board);
-                }
-                this.game.startTime = data.start_time;
-                this.game.endTime = data.end_time;
-                this.playing = true;
-                this.waiting = false;
-                if (data.winner != null) {
-                  this.winner = data.winner;
-                }
-              }
-            } catch (exception) {
-              console.log(exception);
-            }
-          });
-      },
-      (error) => {
-        console.log('Error en la petición:' + error);
-      }
-    );
-  }
-
-  searchGame() {
-    this.winner = '';
-    this.searching = true;
-    this.gamenotfound = false;
-    this._apiService.searchGame(this.username).subscribe(
-      (response) => {
-        if (response.game_id != '') {
-          this.searching = false;
-          this.waiting = true;
+    if (!this.waiting_for_response) {
+      this.waiting_for_response = true;
+      this.gamenotfound = false;
+      this.winner = '';
+      this.waiting = true;
+      this._apiService.createGame(this.username).subscribe(
+        (response) => {
           this.countEventsSubscription$ = this.sseService
-            .getServerSentEvent(response.game_id, response.player2_id)
+            .getServerSentEvent(response.game_id, response.player_id)
             .subscribe((event) => {
+              this.waiting_for_response = false;
               try {
                 let data = JSON.parse(event.data);
 
                 if (!this.game.active) {
                   this.game.start(
                     response.game_id,
-                    response.player2_id,
-                    response.player2_name
+                    response.player_id,
+                    response.player_name
                   );
-                  this.game.setOpponent(data.player1_name);
                 } else {
                   if (data.player1_board != null) {
+                    this.game.setOpponent(data.player2_name);
                     this.game.updateGame(
-                      data.player2_board,
-                      data.player1_board
+                      data.player1_board,
+                      data.player2_board
                     );
                   }
                   this.game.startTime = data.start_time;
                   this.game.endTime = data.end_time;
-                  this.waiting = false;
                   this.playing = true;
+                  this.waiting = false;
                   if (data.winner != null) {
                     this.winner = data.winner;
                   }
@@ -129,17 +89,70 @@ export class MatchGameComponent implements OnInit {
                 console.log(exception);
               }
             });
-        } else {
-          this.searching = false;
-          this.waiting = false;
-          this.gamenotfound = true;
-          this.createGame();
+        },
+        (error) => {
+          console.log('Error en la petición:' + error);
         }
-      },
-      (error) => {
-        console.log('Error en la petición:' + error);
-      }
-    );
+      );
+    }
+  }
+
+  searchGame() {
+    if (!this.waiting_for_response) {
+      this.waiting_for_response = true;
+      this.winner = '';
+      this.searching = true;
+      this.gamenotfound = false;
+      this._apiService.searchGame(this.username).subscribe(
+        (response) => {
+          if (response.game_id != '') {
+            this.searching = false;
+            this.waiting = true;
+            this.countEventsSubscription$ = this.sseService
+              .getServerSentEvent(response.game_id, response.player2_id)
+              .subscribe((event) => {
+                this.waiting_for_response = false;
+                try {
+                  let data = JSON.parse(event.data);
+
+                  if (!this.game.active) {
+                    this.game.start(
+                      response.game_id,
+                      response.player2_id,
+                      response.player2_name
+                    );
+                    this.game.setOpponent(data.player1_name);
+                  } else {
+                    if (data.player1_board != null) {
+                      this.game.updateGame(
+                        data.player2_board,
+                        data.player1_board
+                      );
+                    }
+                    this.game.startTime = data.start_time;
+                    this.game.endTime = data.end_time;
+                    this.waiting = false;
+                    this.playing = true;
+                    if (data.winner != null) {
+                      this.winner = data.winner;
+                    }
+                  }
+                } catch (exception) {
+                  console.log(exception);
+                }
+              });
+          } else {
+            this.searching = false;
+            this.waiting = false;
+            this.gamenotfound = true;
+            this.createGame();
+          }
+        },
+        (error) => {
+          console.log('Error en la petición:' + error);
+        }
+      );
+    }
   }
 
   stopGame() {
