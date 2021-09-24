@@ -3,8 +3,8 @@ import { Subscription } from 'rxjs';
 import { SseService } from '../../services/sse.service';
 import { ApiService } from '../../services/api.service';
 import { Game } from '../../models/game.model';
-//import Moment from 'moment';
-import * as moment from 'moment';
+import Moment from 'moment';
+//import * as moment from 'moment';
 
 @Component({
   selector: 'app-match-game',
@@ -168,7 +168,7 @@ export class MatchGameComponent implements OnInit {
   }
 
   updateclicked(f: number, c: number): void {
-    if(Math.round((moment().diff(this.game.endTime) / 1000) * -1) > 0) {
+    if (Math.round((Moment().diff(this.game.endTime) / 1000) * -1) > 0) {
       this.update(f, c);
       this.checkNeighbors(f, c);
     }
@@ -186,7 +186,7 @@ export class MatchGameComponent implements OnInit {
   }
 
   calculateSeconds() {
-    let seconds = Math.round((moment().diff(this.game.endTime) / 1000) * -1);
+    let seconds = Math.round((Moment().diff(this.game.endTime) / 1000) * -1);
     return seconds >= 0 ? seconds : 0;
   }
 
