@@ -69,13 +69,15 @@ export class MatchGameComponent implements OnInit {
                 this.game.start(
                   response.game_id,
                   response.player_id,
-                  response.player_name
+                  response.player_name,
                 );
               } else {
                 if (data.player1_board != null) {
                   this.game.setOpponent(data.player2_name);
                   this.game.updateGame(data.player1_board, data.player2_board);
-                  this.p_dissplay_board = this.game._player_board;
+                  if(this.p_dissplay_board == null) {
+                    this.p_dissplay_board = this.game._player_board;
+                  }
                 }
                 this.game.startTime = data.start_time;
                 this.game.endTime = data.end_time;
@@ -127,7 +129,9 @@ export class MatchGameComponent implements OnInit {
                         data.player2_board,
                         data.player1_board
                       );
-                      this.p_dissplay_board = this.game._player_board;
+                  if (this.p_dissplay_board == null) {
+                    this.p_dissplay_board = this.game._player_board;
+                  }
                     }
                     this.game.startTime = data.start_time;
                     this.game.endTime = data.end_time;
@@ -164,7 +168,7 @@ export class MatchGameComponent implements OnInit {
   }
 
   updateclicked(f: number, c: number): void {
-    if(this.winner != '' && Math.round((moment().diff(this.game.endTime) / 1000) * -1) > 0) {
+    if(Math.round((moment().diff(this.game.endTime) / 1000) * -1) > 0) {
       this.update(f, c);
       this.checkNeighbors(f, c);
     }
