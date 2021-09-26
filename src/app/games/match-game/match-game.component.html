@@ -1,7 +1,7 @@
 <div class="game-container screen">
   <br />
 
-  <div class="form-group">
+  <div class="form-group" *ngIf="this.game.getOpponentName() == '' || this.game.getOpponentName() == null">
     <input
       class="form-control"
       type="text"
@@ -20,8 +20,15 @@
         Create Game
       </button> -->
     &nbsp;
-    <div class="button" (click)="searchGame()" *ngIf="!waiting && !playing">
-      <div class="title text-center">Search Game</div>
+    <div class="button"
+         (click)="searchGame()"
+         *ngIf="!waiting && !playing"
+         [attr.disabled]="waiting_for_response ? 'disabled' : null">
+      <div class="title text-center">
+        <ng-container *ngIf="!waiting_for_response"> Search Game </ng-container>
+        <ng-container *ngIf="waiting_for_response"> Connecting ...</ng-container>
+
+      </div>
     </div>
     <div
       *ngIf="
