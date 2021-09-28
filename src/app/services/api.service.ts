@@ -11,12 +11,12 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   createGame(username: string, passowrd: string) {
-    if (localStorage.getItem('userid') != null) {
+    if (sessionStorage.getItem('userid') != null) {
       return this.http
         .get(
           this.endpoint +
             'inverter/game/creategamebyid/' +
-            localStorage.getItem('userid') +
+            sessionStorage.getItem('userid') +
             '/' +
             username
         )
@@ -41,12 +41,12 @@ export class ApiService {
   }
 
   searchGame(username: string, passowrd: string) {
-    if (localStorage.getItem('userid') != null) {
+    if (sessionStorage.getItem('userid') != null) {
       return this.http
         .get(
           this.endpoint +
             'inverter/game/searchgamebyid/' +
-            localStorage.getItem('userid') +
+            sessionStorage.getItem('userid') +
             '/' +
             username
         )
