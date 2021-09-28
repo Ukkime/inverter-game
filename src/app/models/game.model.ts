@@ -37,7 +37,7 @@ export class Game {
     this.active = true;
 
     this._audio = new Audio(
-      'http://informatica.alexlatorre.com/public/Solve The Puzzle.ogg'
+      'https://patrickdearteaga.com/audio/Solve%20The%20Puzzle.ogg'
     );
     this._audio.play();
   }
