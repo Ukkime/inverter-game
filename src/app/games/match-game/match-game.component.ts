@@ -29,10 +29,10 @@ export class MatchGameComponent implements OnInit {
   public p_dissplay_board: any;
 
   constructor(private _apiService: ApiService, private sseService: SseService) {
-    let calculate_username = sessionStorage.getItem('username');
+    let calculate_username = localStorage.getItem('username');
     this.username =
       calculate_username != 'null' && calculate_username != 'undefined'
-        ? sessionStorage.getItem('username')
+        ? localStorage.getItem('username')
         : '';
     this.password = '';
     this.validusername = false;
@@ -59,12 +59,12 @@ export class MatchGameComponent implements OnInit {
   }
 
   hasLocalUserid() {
-    return sessionStorage.getItem('userid') != null;
+    return localStorage.getItem('userid') != null;
   }
 
   cleanLocalData() {
-    sessionStorage.removeItem('userid');
-    sessionStorage.removeItem('username');
+    localStorage.removeItem('userid');
+    localStorage.removeItem('username');
   }
 
   createGame() {
@@ -74,8 +74,8 @@ export class MatchGameComponent implements OnInit {
     this.waiting = true;
     this._apiService.createGame(this.username, this.password).subscribe(
       (response) => {
-        sessionStorage.setItem('userid', response.player_id);
-        sessionStorage.setItem('username', response.player_name);
+        localStorage.setItem('userid', response.player_id);
+        localStorage.setItem('username', response.player_name);
 
         this.countEventsSubscription$ = this.sseService
           .getServerSentEvent(response.game_id, response.player_id)
@@ -127,8 +127,8 @@ export class MatchGameComponent implements OnInit {
       this._apiService.searchGame(this.username, this.password).subscribe(
         (response) => {
           if (response.game_id != '') {
-            sessionStorage.setItem('userid', response.player2_id);
-            sessionStorage.setItem('username', response.player_name);
+            localStorage.setItem('userid', response.player2_id);
+            localStorage.setItem('username', response.player_name);
             this.searching = false;
             this.waiting = true;
             this.countEventsSubscription$ = this.sseService
