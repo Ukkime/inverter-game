@@ -23,7 +23,10 @@ export class Game {
 
   constructor() {
     this.active = false;
-    this._audio = new Audio();
+
+    this._audio = new Audio(
+      'https://patrickdearteaga.com/audio/Solve%20The%20Puzzle.ogg'
+    );
   }
 
   start(gid: string, pid: string, pname: string) {
@@ -36,13 +39,14 @@ export class Game {
     this._opponent_board;
     this.active = true;
 
-    this._audio = new Audio('assets/Solve The Puzzle.ogg');
+    this._audio = new Audio(
+      'https://patrickdearteaga.com/audio/Solve%20The%20Puzzle.ogg'
+    );
     this._audio.play();
-
   }
 
   stop() {
-     this._audio.pause();
+    this._audio.pause();
   }
 
   updateGame(player_board: string, opponent_board: string) {
@@ -57,7 +61,7 @@ export class Game {
     let tmp_opponent_board = [];
 
     if (this.last_player_board != player_board) {
-      this.last_player_board  = player_board;
+      this.last_player_board = player_board;
       // Fills array
       for (let i = 0; i < 6; i++) {
         let row = [];

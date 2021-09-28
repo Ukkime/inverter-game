@@ -29,7 +29,11 @@ export class MatchGameComponent implements OnInit {
   public p_dissplay_board: any;
 
   constructor(private _apiService: ApiService, private sseService: SseService) {
-    this.username = sessionStorage.getItem('username') != null ? sessionStorage.getItem('username') : '';
+    let calculate_username = sessionStorage.getItem('username');
+    this.username =
+      calculate_username != 'null' && calculate_username != 'undefined'
+        ? sessionStorage.getItem('username')
+        : '';
     this.password = '';
     this.validusername = false;
     this.waiting = false;
