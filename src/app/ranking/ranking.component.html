@@ -7,13 +7,13 @@
         <span class="rank" [class.winner]="i==0" [class.normal]="i!=0">
           <span>{{i+1}}.</span>
           <!--<img src="assets/winner.svg" *ngIf="i==0">-->
-        </span><br />
+        </span>
       </div>
       <div class="rankcolumnname text-left">
         <span class="rank" [class.winner]="i==0" [class.normal]="i!=0">{{player.player_name}}</span><br />
       </div>
       <div class="rankcolumngames">
-        <span class="rank" [class.winner]="i==0" [class.normal]="i!=0">{{player.winned_games}} wins</span>
+        <span class="rank" [class.winner]="i==0" [class.normal]="i!=0">{{player.winned_games}}</span>
       </div>
     </div>
     <span class="date">Last game: {{player.last_played_game | date:'dd/MM/yyyy HH:mm:ss'}} UTC</span>
