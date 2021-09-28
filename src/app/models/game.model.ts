@@ -23,7 +23,10 @@ export class Game {
 
   constructor() {
     this.active = false;
-    this._audio = new Audio();
+
+    this._audio = new Audio(
+      'https://patrickdearteaga.com/audio/Solve%20The%20Puzzle.ogg'
+    );
   }
 
   start(gid: string, pid: string, pname: string) {
