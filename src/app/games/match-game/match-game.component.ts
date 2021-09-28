@@ -45,7 +45,13 @@ export class MatchGameComponent implements OnInit {
     this.waiting_for_response = false;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    let calculate_username = localStorage.getItem('username');
+    this.username =
+      calculate_username != 'null' && calculate_username != 'undefined'
+        ? localStorage.getItem('username')
+        : '';
+  }
 
   checkusername() {
     this.validusername = true;
