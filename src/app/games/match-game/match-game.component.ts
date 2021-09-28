@@ -134,7 +134,7 @@ export class MatchGameComponent implements OnInit {
         (response) => {
           if (response.game_id != '') {
             localStorage.setItem('userid', response.player2_id);
-            localStorage.setItem('username', response.player_name);
+            localStorage.setItem('username', response.player2_name);
             this.searching = false;
             this.waiting = true;
             this.countEventsSubscription$ = this.sseService
