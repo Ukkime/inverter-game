@@ -1,0 +1,30 @@
+<div class="game-container screen text-right">
+  <div class="title main-title text-center">Ranking:</div>
+
+  <ng-container *ngFor="let player of rankingList; let i=index">
+    <div class="rankrow text-center card">
+      <div class="rankcolumnpos">
+        <span class="rank" [class.winner]="i==0" [class.normal]="i!=0">
+          <span *ngIf="i!=0">{{i+1}}.</span>
+          <img src="assets/winner.svg" *ngIf="i==0">
+        </span><br />
+      </div>
+      <div class="rankcolumnname text-left">
+        <span class="rank" [class.winner]="i==0" [class.normal]="i!=0">{{player.player_name}}</span><br />
+      </div>
+      <div class="rankcolumngames">
+        <span class="rank" [class.winner]="i==0" [class.normal]="i!=0">{{player.winned_games}} wins</span>
+      </div>
+    </div>
+    <span class="date">Last game: {{player.last_played_game | date:'dd/MM/yyyy HH:mm:ss'}} UTC</span>
+  </ng-container>
+  <br/><br/><br/>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item text-center"><i>**Rankig is saved for an hour since last played game</i></li>
+  </ul>
+
+</div>
+
+<div class="button button-home" [routerLink]="['/']">
+  <div class="title button-title text-center">Back to home</div>
+</div>

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { StartMenuComponent } from './start-menu/start-menu.component'
 import { TutorialComponent } from './tutorial/tutorial.component'
+import { RankingComponent } from './ranking/ranking.component';
 
 
 const routes: Routes = [
@@ -11,10 +12,11 @@ const routes: Routes = [
       import('../app/games/games.module').then((m) => m.GamesModule),
   },
   { path: 'tutorial', component: TutorialComponent },
+  { path: 'ranking', component: RankingComponent },
   {
     path: '**',
-    component: StartMenuComponent
-  }
+    component: StartMenuComponent,
+  },
 ];
 
 @NgModule({

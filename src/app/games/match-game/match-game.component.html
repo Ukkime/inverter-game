@@ -6,7 +6,7 @@
       class="form-control"
       type="text"
       placeholder="Enter NickName"
-      [attr.disabled]="waiting ? true : null"
+      [attr.disabled]="waiting ? true : hasLocalUserid() ? true : null"
       name="username"
       [(ngModel)]="username"
       (keyup)="checkusername()"
@@ -15,10 +15,14 @@
   </div>
 
   <div class="form-group text-right">
-    <!--
-      <button type="submit" class="btn btn-primary" (click)="createGame()" *ngIf="!waiting && !playing">
-        Create Game
-      </button> -->
+    <div class="button button-cancel"
+         (click)="cleanLocalData()"
+         *ngIf="!waiting && !playing &&  hasLocalUserid()"
+         [attr.disabled]="waiting_for_response ? 'disabled' : null">
+      <div class="title text-center">
+        <ng-container> Change Player Profile</ng-container>
+      </div>
+    </div>
     &nbsp;
     <div class="button"
          (click)="searchGame()"
@@ -65,7 +69,7 @@
   >
     Ready to find opponent
   </div>
-  <div class="alert alert-warning" *ngIf="!validusername && !waiting">
+  <div class="alert alert-warning" *ngIf="!validusername && !waiting && !hasLocalUserid()">
     Enter valid nickname <br />
     (without spaces and between 4 and 15 characters)
   </div>

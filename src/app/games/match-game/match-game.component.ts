@@ -16,6 +16,7 @@ export class MatchGameComponent implements OnInit {
   private countEventsSubscription$: Subscription;
   public game: Game;
   public username: string;
+  public password: string;
   public validusername: boolean;
   public waiting: boolean;
   public playing: boolean;
@@ -28,7 +29,8 @@ export class MatchGameComponent implements OnInit {
   public p_dissplay_board: any;
 
   constructor(private _apiService: ApiService, private sseService: SseService) {
-    this.username = '';
+    this.username = localStorage.getItem('username') + '';
+    this.password = '';
     this.validusername = false;
     this.waiting = false;
     this.playing = false;
@@ -52,13 +54,25 @@ export class MatchGameComponent implements OnInit {
     }
   }
 
+  hasLocalUserid() {
+    return localStorage.getItem('userid') != null;
+  }
+
+  cleanLocalData() {
+    localStorage.removeItem('userid');
+    localStorage.removeItem('username');
+  }
+
   createGame() {
     this.waiting_for_response = true;
     this.gamenotfound = false;
     this.winner = '';
     this.waiting = true;
-    this._apiService.createGame(this.username).subscribe(
+    this._apiService.createGame(this.username, this.password).subscribe(
       (response) => {
+        localStorage.setItem('userid', response.player_id);
+        localStorage.setItem('username', response.player_name);
+
         this.countEventsSubscription$ = this.sseService
           .getServerSentEvent(response.game_id, response.player_id)
           .subscribe((event) => {
@@ -70,13 +84,13 @@ export class MatchGameComponent implements OnInit {
                 this.game.start(
                   response.game_id,
                   response.player_id,
-                  response.player_name,
+                  response.player_name
                 );
               } else {
                 if (data.player1_board != null) {
                   this.game.setOpponent(data.player2_name);
                   this.game.updateGame(data.player1_board, data.player2_board);
-                  if(this.p_dissplay_board == null) {
+                  if (this.p_dissplay_board == null) {
                     this.p_dissplay_board = this.game._player_board;
                   }
                 }
@@ -106,9 +120,11 @@ export class MatchGameComponent implements OnInit {
       this.winner = '';
       this.searching = true;
       this.gamenotfound = false;
-      this._apiService.searchGame(this.username).subscribe(
+      this._apiService.searchGame(this.username, this.password).subscribe(
         (response) => {
           if (response.game_id != '') {
+            localStorage.setItem('userid', response.player2_id);
+            localStorage.setItem('username', response.player_name);
             this.searching = false;
             this.waiting = true;
             this.countEventsSubscription$ = this.sseService
@@ -131,9 +147,9 @@ export class MatchGameComponent implements OnInit {
                         data.player2_board,
                         data.player1_board
                       );
-                  if (this.p_dissplay_board == null) {
-                    this.p_dissplay_board = this.game._player_board;
-                  }
+                      if (this.p_dissplay_board == null) {
+                        this.p_dissplay_board = this.game._player_board;
+                      }
                     }
                     this.game.startTime = data.start_time;
                     this.game.endTime = data.end_time;
@@ -163,11 +179,10 @@ export class MatchGameComponent implements OnInit {
   }
 
   stopGame() {
-
     this.sseService.stopEventSource();
     try {
       this.game.stop();
-    } catch(e) {
+    } catch (e) {
       // nothing to do
     }
 
@@ -178,7 +193,7 @@ export class MatchGameComponent implements OnInit {
   }
 
   updateclicked(f: number, c: number): void {
-    if(Math.round((Moment().diff(this.game.endTime) / 1000) * -1) > 0) {
+    if (Math.round((Moment().diff(this.game.endTime) / 1000) * -1) > 0) {
       this.update(f, c);
       this.checkNeighbors(f, c);
     }
@@ -262,7 +277,7 @@ export class MatchGameComponent implements OnInit {
       this.update(f - 1, c - 1);
       this.update(f - 1, c);
       this.update(f, c - 1);
-    } else if ( f == this.p_dissplay_board.length - 1 && c == 0) {
+    } else if (f == this.p_dissplay_board.length - 1 && c == 0) {
       this.update(f - 1, c);
       this.update(f - 1, c + 1);
       this.update(f, c + 1);

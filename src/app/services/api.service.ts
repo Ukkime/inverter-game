@@ -10,16 +10,58 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  createGame(username: string) {
+  createGame(username: string, passowrd: string) {
+    if (localStorage.getItem('userid') != null) {
+      return this.http
+        .get(
+          this.endpoint +
+            'inverter/game/creategamebyid/' +
+            localStorage.getItem('userid') +
+            '/' +
+            username
+        )
+        .pipe(map((response: any) => response));
+    } else {
+      return this.http
+        .get(
+          this.endpoint +
+            'inverter/game/creategame/' +
+            username +
+            '/' +
+            passowrd
+        )
+        .pipe(map((response: any) => response));
+    }
+  }
+
+  getRanking() {
     return this.http
-      .get(this.endpoint + 'inverter/game/creategame/' + username)
+      .get(this.endpoint + 'inverter/game/getranking')
       .pipe(map((response: any) => response));
   }
 
-  searchGame(username: string) {
-    return this.http
-      .get(this.endpoint + 'inverter/game/searchGame/' + username)
-      .pipe(map((response: any) => response));
+  searchGame(username: string, passowrd: string) {
+    if (localStorage.getItem('userid') != null) {
+      return this.http
+        .get(
+          this.endpoint +
+            'inverter/game/searchgamebyid/' +
+            localStorage.getItem('userid') +
+            '/' +
+            username
+        )
+        .pipe(map((response: any) => response));
+    } else {
+      return this.http
+        .get(
+          this.endpoint +
+            'inverter/game/searchGame/' +
+            username +
+            '/' +
+            passowrd
+        )
+        .pipe(map((response: any) => response));
+    }
   }
 
   sendClick(gameid: string, playerid: string, x: number, y: number) {
