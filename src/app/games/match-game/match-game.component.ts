@@ -15,7 +15,7 @@ import Moment from 'moment';
 export class MatchGameComponent implements OnInit {
   private countEventsSubscription$: Subscription;
   public game: Game;
-  public username: string;
+  public username: any;
   public password: string;
   public validusername: boolean;
   public waiting: boolean;
