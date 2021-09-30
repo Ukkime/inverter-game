@@ -16,7 +16,6 @@ export class MatchGameComponent implements OnInit {
   private countEventsSubscription$: Subscription;
   public game: Game;
   public username: any;
-  public password: string;
   public validusername: boolean;
   public waiting: boolean;
   public playing: boolean;
@@ -34,7 +33,6 @@ export class MatchGameComponent implements OnInit {
       calculate_username != 'null' && calculate_username != 'undefined'
         ? localStorage.getItem('username')
         : '';
-    this.password = '';
     this.validusername = false;
     this.waiting = false;
     this.playing = false;
@@ -78,7 +76,7 @@ export class MatchGameComponent implements OnInit {
     this.gamenotfound = false;
     this.winner = '';
     this.waiting = true;
-    this._apiService.createGame(this.username, this.password).subscribe(
+    this._apiService.createGame(this.username).subscribe(
       (response) => {
         localStorage.setItem('userid', response.player_id);
         localStorage.setItem('username', response.player_name);
@@ -130,7 +128,7 @@ export class MatchGameComponent implements OnInit {
       this.winner = '';
       this.searching = true;
       this.gamenotfound = false;
-      this._apiService.searchGame(this.username, this.password).subscribe(
+      this._apiService.searchGame(this.username).subscribe(
         (response) => {
           if (response.game_id != '') {
             localStorage.setItem('userid', response.player2_id);

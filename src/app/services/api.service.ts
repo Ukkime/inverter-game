@@ -10,7 +10,7 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  createGame(username: string, passowrd: string) {
+  createGame(username: string) {
     if (localStorage.getItem('userid') != null) {
       return this.http
         .get(
@@ -23,13 +23,7 @@ export class ApiService {
         .pipe(map((response: any) => response));
     } else {
       return this.http
-        .get(
-          this.endpoint +
-            'inverter/game/creategame/' +
-            username +
-            '/' +
-            passowrd
-        )
+        .get(this.endpoint + 'inverter/game/creategame/' + username)
         .pipe(map((response: any) => response));
     }
   }
@@ -40,7 +34,7 @@ export class ApiService {
       .pipe(map((response: any) => response));
   }
 
-  searchGame(username: string, passowrd: string) {
+  searchGame(username: string) {
     if (localStorage.getItem('userid') != null) {
       return this.http
         .get(
@@ -53,13 +47,7 @@ export class ApiService {
         .pipe(map((response: any) => response));
     } else {
       return this.http
-        .get(
-          this.endpoint +
-            'inverter/game/searchGame/' +
-            username +
-            '/' +
-            passowrd
-        )
+        .get(this.endpoint + 'inverter/game/searchGame/' + username)
         .pipe(map((response: any) => response));
     }
   }
