@@ -1,38 +1,38 @@
-<div class="container">
-  <h3>Game rules:</h3>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Paint all grid with the same color</li>
-    <li class="list-group-item">
-      Each cell you click and his neightbors will invert they color
-    </li>
-    <li class="list-group-item">Be fun!</li>
-  </ul>
+<div class="game-container">
+<h3>Game rules:</h3>
+<ul class="list-group list-group-flush">
+  <li class="list-group-item">Paint all grid with the same color</li>
+  <li class="list-group-item">
+    Each cell you click and his neightbors will invert they color
+  </li>
+  <li class="list-group-item">Be fun!</li>
+</ul>
 
-  <h3>Some tips:</h3>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">
-      <b>Basic movements:</b><br />
-      <p>
-        By clicking on a cell, it will change its color and that of its
-        neighbors. <br />
-        This means that you can use it at the ends of the board to make a corner
-        or side change the color. If a cell only has 3 neighbors because it is
-        in a corner, you can make a 2x2 square disappear (1)<br />
-        If, on the other hand, you click on a side, you will affect a group of
-        2x3 (2)<br />
-        Finally, if you click in the center of the board, it will affect the
-        maximum possible cells, inverting a 3x3 square (3).
-      </p>
-      <div class="text-center">
-        <b>Before</b><br />
-        <img src="https://i.ibb.co/nDWw2dp/1.png" /><br />
-        <b>After</b><br />
-        <img src="https://i.ibb.co/v3ML9ZS/2.png" /><br />
-      </div>
-    </li>
-  </ul>
+<h3>Some tips:</h3>
+<ul class="list-group list-group-flush">
+  <li class="list-group-item">
+    <b>Basic movements:</b><br />
+    <p>
+      By clicking on a cell, it will change its color and that of its
+      neighbors. <br />
+      This means that you can use it at the ends of the board to make a corner
+      or side change the color. If a cell only has 3 neighbors because it is
+      in a corner, you can make a 2x2 square disappear (1)<br />
+      If, on the other hand, you click on a side, you will affect a group of
+      2x3 (2)<br />
+      Finally, if you click in the center of the board, it will affect the
+      maximum possible cells, inverting a 3x3 square (3).
+    </p>
+    <div class="text-center">
+      <b>Before</b><br />
+      <img src="https://i.ibb.co/nDWw2dp/1.png" /><br />
+      <b>After</b><br />
+      <img src="https://i.ibb.co/v3ML9ZS/2.png" /><br />
+    </div>
+  </li>
+</ul>
 
-  <div class="button button-home" [routerLink]="['/']">
-    <div class="title text-center">Back to home</div>
-  </div>
+<div class="button button-home" [routerLink]="['/']">
+  <div class="title text-center">Back to home</div>
+</div>
 </div>
