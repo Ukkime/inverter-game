@@ -2,6 +2,7 @@
   <div class="panel" *ngIf="grid != null">
     <div class="grow" *ngFor="let row of grid; let i = index">
       <div
+        class="hand gcell"
         [class.gcell6]="true"
         [class.active]="grid[i][j] == true"
         [class.inactive]="!(grid[i][j] == true)"
