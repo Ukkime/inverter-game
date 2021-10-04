@@ -7,10 +7,12 @@ import { AppComponent } from './app.component';
 import { GamesModule } from './games/games.module';
 import { StartMenuComponent } from './start-menu/start-menu.component';
 import { TutorialComponent } from './tutorial/tutorial.component';
-import { RankingComponent } from './ranking/ranking.component'
+import { RankingComponent } from './ranking/ranking.component';
+import { SettingsComponent } from './settings/settings.component';
+import { MiniatureComponent } from './miniature/miniature.component';
 
 @NgModule({
-  declarations: [AppComponent, StartMenuComponent, TutorialComponent, RankingComponent],
+  declarations: [AppComponent, StartMenuComponent, TutorialComponent, RankingComponent, SettingsComponent, MiniatureComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule, GamesModule],
   providers: [],
   bootstrap: [AppComponent],

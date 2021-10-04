@@ -1,0 +1,41 @@
+<div class="game-container">
+  <h3>Game Colors:</h3>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+    <form class="form-inline">
+      <div class="form-group">
+        <select
+          class="form-control"
+          (change)="updateColors()"
+          [(ngModel)]="colors"
+          [ngModelOptions]="{ standalone: true }"
+        >
+          <option value="">Classic</option>
+          <option value="aqua">Aqua</option>
+          <option value="fire">Fire</option>
+          <option value="pinky">Pinky</option>
+        </select>
+      </div>
+    </form>
+    <div class="panel" *ngIf="grid != null">
+      <div class="grow" *ngFor="let row of grid; let i = index">
+        <div
+          class="hand gcell"
+          [class.gcell6]="true"
+          [class.active]="grid[i][j] == true"
+          [class.inactive]="!(grid[i][j] == true)"
+          (click)="updateclicked(i, j)"
+          *ngFor="let cell of row; let j = index"
+          class="{{ getCustomColorsScheme(grid[i][j] == true)}}"
+        ></div>
+      </div>
+      <br />
+    </div>
+
+    </li>
+  </ul>
+
+  <div class="button button-home" [routerLink]="['/']">
+    <div class="title text-center">Back to home</div>
+  </div>
+</div>

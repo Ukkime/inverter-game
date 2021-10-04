@@ -1,22 +1,27 @@
 <br /><br />
 <div class="text-center">
-  <img src="https://i.ibb.co/yy87Wxm/logo.png" width="60%" />
+  <!--<img src="https://i.ibb.co/yy87Wxm/logo.png" width="60%" />-->
+  <app-miniature></app-miniature>
   <br />
 
-  <div class="button">
+  <div class="button {{getCustomColorsScheme()}}">
     <div class="title" [routerLink]="['/games/classic']">Training</div>
   </div>
 
-  <div class="button">
+  <div class="button {{getCustomColorsScheme()}}">
     <div class="title" [routerLink]="['/games/match']">VS Match</div>
   </div>
 
-  <div class="button">
+  <div class="button {{getCustomColorsScheme()}}">
     <div class="title" [routerLink]="['/ranking']">Ranking</div>
   </div>
 
-  <div class="button">
+  <div class="button {{getCustomColorsScheme()}}">
     <div class="title" [routerLink]="['/tutorial']">Tutorial</div>
+  </div>
+
+  <div class="button {{getCustomColorsScheme()}}">
+    <div class="title" [routerLink]="['/settings']">Settings</div>
   </div>
 
   <ul class="list-group list-group-flush">

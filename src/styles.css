@@ -1,2 +1,44 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
+
+.aqua {
+
+}
+
+.fire-active {
+  background-color: #E14A3E !important;
+}
+
+.fire-inactive {
+  background-color: #FBAD66 !important;
+}
+
+.aqua-active {
+  background-color: #6ABABA !important;
+}
+
+.aqua-inactive {
+  background-color: #4F6AA8 !important;
+}
+
+.pinky-active {
+  background-color: #DB61A6 !important;
+}
+
+.pinky-inactive {
+  background-color: #eeafd3 !important;
+}
+
+
+
+.fire-button {
+  background-color: #E14A3E !important;
+}
+
+.aqua-button {
+  background-color: #6ABABA !important;
+}
+
+.pinky-button {
+  background-color: #DB61A6 !important;
+}

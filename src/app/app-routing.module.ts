@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { StartMenuComponent } from './start-menu/start-menu.component'
 import { TutorialComponent } from './tutorial/tutorial.component'
 import { RankingComponent } from './ranking/ranking.component';
-
+import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes = [
   {
@@ -13,6 +13,7 @@ const routes: Routes = [
   },
   { path: 'tutorial', component: TutorialComponent },
   { path: 'ranking', component: RankingComponent },
+  { path: 'settings', component: SettingsComponent },
   {
     path: '**',
     component: StartMenuComponent,

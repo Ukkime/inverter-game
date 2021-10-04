@@ -300,4 +300,12 @@ export class MatchGameComponent implements OnInit {
       this.update(f, c + 1);
     }
   }
+
+  getCustomColorsScheme(active: boolean) {
+    if (active) {
+      return localStorage.getItem('colors') + '-active';
+    } else {
+      return localStorage.getItem('colors') + '-inactive';
+    }
+  }
 }

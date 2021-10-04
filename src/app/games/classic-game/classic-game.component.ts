@@ -224,4 +224,12 @@ export class ClassicGameComponent implements OnInit {
       this.startNewwGame();
     }
   }
+
+  getCustomColorsScheme(active: boolean) {
+    if (active) {
+      return localStorage.getItem('colors') + '-active';
+    } else {
+      return localStorage.getItem('colors') + '-inactive';
+    }
+  }
 }

@@ -1,0 +1,64 @@
+.grow {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.gcell5 {
+  flex-basis: calc(20% - 2px);
+}
+
+.gcell6 {
+  flex-basis: calc(16.66% - 2px);
+}
+
+.gcell8 {
+  flex-basis: calc(12.5% - 2px);
+}
+
+.gcell10 {
+  flex-basis: calc(10% - 2px);
+}
+
+.gcell {
+  position: relative;
+  border: 1px solid;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border-color: darkgray;
+  margin: 1px;
+  -webkit-box-shadow: inset 0px 0px 0px 3px #413e3e,
+    inset 5px 5px 0px 1px rgba(255, 255, 255, 0.5);
+  box-shadow: inset 0px 0px 0px 3px #413e3e,
+    inset 5px 5px 0px 1px rgba(255, 255, 255, 0.4);
+}
+
+.gcell::before {
+  content: '';
+  display: block;
+  padding-top: 100%;
+}
+
+.game-container {
+  padding-right: 60px;
+  padding-left: 60px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.trow {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+
+.active {
+  background-color: cadetblue;
+}
+
+.inactive {
+  background-color: rgb(108, 114, 114);
+}
+
+.hand:hover {
+  cursor: pointer;
+}
