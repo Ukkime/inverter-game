@@ -14,7 +14,14 @@
           <option value="aqua">Aqua</option>
           <option value="fire">Fire</option>
           <option value="pinky">Pinky</option>
+          <option value="emo">Emo</option>
         </select>
+      </div>
+      <div class="form-check text-right">
+        <input class="form-check-input" type="checkbox" (change)="updateColorBlindmode()" [(ngModel)]="colorblindmode" id="flexCheckDefault" [ngModelOptions]="{ standalone: true }">
+        <label class="form-check-label" for="flexCheckDefault">
+          &nbsp;&nbsp;Colorblind mode&nbsp;&nbsp;
+        </label>
       </div>
     </form>
     <div class="panel" *ngIf="grid != null">

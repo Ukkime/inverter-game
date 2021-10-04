@@ -29,6 +29,18 @@
   background-color: #eeafd3 !important;
 }
 
+.emo-active {
+  background-color: #6C3894 !important;
+}
+
+.emo-inactive {
+  background-color: #32253C !important;
+}
+
+.colorblindmode {
+  background-image: url("assets/texture.png");
+  background-size: 250px 250px;
+}
 
 
 .fire-button {
@@ -41,4 +53,8 @@
 
 .pinky-button {
   background-color: #DB61A6 !important;
+}
+
+.emo-button {
+  background-color: #6C3894 !important;
 }

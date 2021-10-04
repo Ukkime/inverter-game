@@ -302,10 +302,9 @@ export class MatchGameComponent implements OnInit {
   }
 
   getCustomColorsScheme(active: boolean) {
-    if (active) {
-      return localStorage.getItem('colors') != null
-        ? localStorage.getItem('colors') + '-active'
-        : '';
+    let blindmode = localStorage.getItem('colorblindmode') == 'true' ? 'colorblindmode' : '';
+    if(active) {
+      return localStorage.getItem('colors') + '-active ' + blindmode;
     } else {
       return localStorage.getItem('colors') != null
         ? localStorage.getItem('colors') + '-inactive'

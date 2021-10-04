@@ -10,12 +10,17 @@ export class SettingsComponent implements OnInit {
   public size = 6;
   public grid: any;
   public colors: string;
+  public colorblindmode: string;
 
   constructor() {}
 
   ngOnInit(): void {
     this.colors =
       localStorage.getItem('colors') ?? '';
+
+    this.colorblindmode =
+      localStorage.getItem('colorblindmode') ?? '';
+
     this.startNewwGame();
   }
 
@@ -23,12 +28,21 @@ export class SettingsComponent implements OnInit {
     localStorage.setItem('colors', this.colors);
   }
 
+  updateColorBlindmode() {
+    localStorage.setItem('colorblindmode', this.colorblindmode);
+  }
+
   getCustomColorsScheme(active: boolean) {
+    let blindmode = localStorage.getItem('colorblindmode') == 'true' ? 'colorblindmode' : '';
     if(active) {
-      return localStorage.getItem('colors') + '-active';
+      return localStorage.getItem('colors') + '-active ' + blindmode;
     } else {
       return localStorage.getItem('colors') + '-inactive';
     }
+  }
+
+  getColorBlindMode() {
+    return localStorage.getItem('colors') + 'blindmode';
   }
 
   // creates empty grid and fill it with 🟢(true) or 🔴(false)

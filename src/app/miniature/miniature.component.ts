@@ -10,12 +10,24 @@ export class MiniatureComponent implements OnInit {
   public size = 6;
   public grid: any;
   public colors: string;
-
+  public interval: any;
   constructor() {}
 
   ngOnInit(): void {
     this.colors = localStorage.getItem('colors') ?? '';
     this.startNewwGame();
+    this.startTimer();
+
+    
+  }
+
+  startTimer() {
+    this.interval = setInterval(() => {
+      let randx = Math.floor(Math.random() * (this.size - 1 - 0 + 1)) + 0;
+      let randy = Math.floor(Math.random() * (this.size - 1 - 0 + 1)) + 0;
+      this.updateclicked(randx, randy);
+    },800);
+
   }
 
   updateColors() {
@@ -23,10 +35,9 @@ export class MiniatureComponent implements OnInit {
   }
 
   getCustomColorsScheme(active: boolean) {
-    if (active) {
-      return localStorage.getItem('colors') != null
-        ? localStorage.getItem('colors') + '-active'
-        : '';
+    let blindmode = localStorage.getItem('colorblindmode') == 'true' ? 'colorblindmode' : '';
+    if(active) {
+      return localStorage.getItem('colors') + '-active ' + blindmode;
     } else {
       return localStorage.getItem('colors') != null
         ? localStorage.getItem('colors') + '-inactive'
