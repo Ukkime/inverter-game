@@ -119,7 +119,7 @@
         [class.inactive]="!(p_dissplay_board[i][j] == true)"
         (click)="updateclicked(i, j)"
         *ngFor="let cell of row; let j = index"
-        class="{{ getCustomColorsScheme(p_dissplay_board[i][j] == true)}}"
+                [ngClass]="getCustomColorsScheme(grid[i][j] == true)"
       ></div>
     </div>
     <br />

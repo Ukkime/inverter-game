@@ -3,8 +3,8 @@ import { Subscription } from 'rxjs';
 import { SseService } from '../../services/sse.service';
 import { ApiService } from '../../services/api.service';
 import { Game } from '../../models/game.model';
-import Moment from 'moment';
-//import * as Moment from 'moment';
+//import Moment from 'moment';
+import * as Moment from 'moment';
 
 @Component({
   selector: 'app-match-game',
