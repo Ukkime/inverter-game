@@ -75,7 +75,7 @@
         [class.inactive]="!(grid[i][j] == '🟢')"
         (click)="updateclicked(i, j)"
         *ngFor="let cell of row; let j = index"
-        class="{{ getCustomColorsScheme(grid[i][j] == '🟢')}}"
+                [ngClass]="getCustomColorsScheme(grid[i][j] == '🟢')"
       ></div>
     </div>
     <br />

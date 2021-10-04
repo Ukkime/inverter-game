@@ -227,9 +227,13 @@ export class ClassicGameComponent implements OnInit {
 
   getCustomColorsScheme(active: boolean) {
     if (active) {
-      return localStorage.getItem('colors') + '-active';
+      return localStorage.getItem('colors') != null
+        ? localStorage.getItem('colors') + '-active'
+        : '';
     } else {
-      return localStorage.getItem('colors') + '-inactive';
+      return localStorage.getItem('colors') != null
+        ? localStorage.getItem('colors') + '-inactive'
+        : '';
     }
   }
 }
