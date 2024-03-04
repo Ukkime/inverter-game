@@ -1,3 +1,3 @@
 # InverterGame
 
-Working example: https://inverter-testing.firebaseapp.com/games/classic
+Working example: https://inverter-game.web.app/
